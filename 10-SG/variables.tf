@@ -5,3 +5,21 @@ variable "project_name" {
 variable "environment" {
   default = "dev"
 }
+
+variable "sg_names" {
+  default = [
+    #Databases
+    "mongodb","redis","mysql","rabbitmq",
+    #Backend
+    "catalogue","user","cart","shipping","payments",
+
+    #frontend
+    "frontend",
+     #Bastion
+    "bastion",
+    #Frontend Applcation Loadbalancer
+    "frontend_alb",
+    #Backend Application Loadbalancer
+    "backend_alb"
+    ]
+}
