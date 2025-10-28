@@ -32,7 +32,8 @@ provisioner "file" {
 
   provisioner "remote-exec" {
     inline = [ 
-        "echo Hello world"
+        "chmod +x /tmp/bootstrap.sh",
+        "sh /tmp/bootstrap.sh"
      ]
   }
 }
