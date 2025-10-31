@@ -28,7 +28,7 @@ resource "aws_security_group_rule" "bastion_laptop"{
   to_port = 22
 }
 
-# mongodb accepting traffic from my bastion
+# mongodb accepting traffic from  bastion
 resource "aws_security_group_rule" "mongodb_bastion"{
   type="ingress"
   security_group_id =local.mongodb_sg_id
