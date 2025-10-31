@@ -1,4 +1,4 @@
-resource "aws_instance" "mongodb" {
+/*  */resource "aws_instance" "mongodb" {
     ami = local.ami_id
     instance_type = "t2.micro"
     vpc_security_group_ids = [local.mongodb_sg_id]
@@ -23,6 +23,7 @@ resource "terraform_data" "mongodb" {
   password="DevOps321"
   host=aws_instance.mongodb.private_ip
 }
+
 
 ##Terraform copy this file to mongodb server
 provisioner "file" {
