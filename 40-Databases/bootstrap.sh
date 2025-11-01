@@ -7,6 +7,7 @@
 # # ansible-playbook -i inventory main.yaml
 
 component=$1
+env=$2
 dnf install ansible -y
 REPO_URL=https://github.com/naginenihari/Ansible_Roboshop_Roles-Terraform.git
 REPO_DIR=/opt/safety/ansible
@@ -29,4 +30,4 @@ else
    cd $ANSIBLE_DIR
 fi
 
-ansible-playbook -e component=$component main.yaml
+ansible-playbook -e component=$component -e environment=$env main.yaml
