@@ -40,7 +40,7 @@ provisioner "file" {
   }
 }
 
-resource "aws_instance" "redis" {
+/* resource "aws_instance" "redis" {
     ami = local.ami_id
     instance_type = "t2.micro"
     vpc_security_group_ids = [local.redis_sg_id]
@@ -118,4 +118,4 @@ provisioner "file" {
         "sudo sh /tmp/bootstrap.sh rabbitmq"
      ]
   }
-}
+} */
