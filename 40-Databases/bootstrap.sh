@@ -1,3 +1,4 @@
+#!/bin/bash
 component=$1
 dnf install ansible -y
 ansible-pull -U https://github.com/naginenihari/Ansible_Roboshop_Roles-Terraform.git -e component=$component main.yaml
