@@ -78,11 +78,11 @@ resource "aws_security_group_rule" "catalogue_bastion"{
   to_port = 22
 }
 
-# catalogue accepting traffic from  mongodb
-resource "aws_security_group_rule" "catalogue_mongodb"{
+# mongodb accepting traffic from catalogue
+resource "aws_security_group_rule" "mongodb-catalogue"{
   type="ingress"
-  security_group_id =local.catalogue_sg_id
-  source_security_group_id = local.mongodb_sg_id
+  security_group_id =local.mongodb_sg_id
+  source_security_group_id = local.catalogue_sg_id
   from_port = 27017
   protocol = "tcp"
   to_port = 27017
