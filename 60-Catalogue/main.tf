@@ -48,7 +48,7 @@ resource "aws_ec2_instance_state" "catalogue" {
   depends_on = [ terraform_data.catalogue ]
 }
 
-##Stop the instance and take the image 
+##AMI Creation 
 resource "aws_ami_from_instance" "catalogue" {
   name               = "${local.common_name_suffix}-catalogue-AMI"
   source_instance_id = aws_instance.catalogue.id
