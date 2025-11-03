@@ -43,3 +43,16 @@ resource "aws_route53_record" "backend_alb" {
     evaluate_target_health = true
   }
 }
+
+resource "terraform_data" "catalogue_local" {
+  triggers_replace = [
+    aws_instance.catalogue.id
+  ]
+
+  depends_on = [ aws_autoscaling_policy.catalogue ]
+  provisioner "local-exec" {
+    command = "aws ec2 terminate-instances --instance_ids ${aws_instance.catalogue.id}"
+  }
+
+  }
+  
