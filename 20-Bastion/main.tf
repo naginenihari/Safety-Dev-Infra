@@ -23,3 +23,5 @@ resource "aws_iam_instance_profile" "bastion" {
   role= "Bastion-Terraform-Admin"
 }
 
+
+
