@@ -171,7 +171,7 @@ target_value = 70
 }
 
 resource "aws_lb_listener_rule" "catalogue" {
-  listener_arn =local. backend_alb_listener_arn
+  listener_arn =local.backend_alb_listener_arn
   priority     = 10
 
   action {
