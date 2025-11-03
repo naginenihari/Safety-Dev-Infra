@@ -26,7 +26,7 @@ resource "aws_lb_listener" "backend_alb" {
 
     fixed_response {
       content_type = "text/plain"
-      message_body = "Hi, am from backend ALB HTTP"
+      message_body = "Hi, am from backend load balancer testing now all services are up"
       status_code  = "200"
     }
   }
