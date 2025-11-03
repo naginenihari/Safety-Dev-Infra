@@ -12,7 +12,7 @@ resource "aws_instance" "catalogue" {
     )
 }
 
-#Connect to instance  using remote-exec provisioners through terraform_data
+#Connect to catalogue instance using remote-exec provisioners through terraform_data
 
 resource "terraform_data" "catalogue" {
   triggers_replace = [
@@ -47,7 +47,7 @@ resource "aws_ec2_instance_state" "catalogue" {
   force       = false # Set to true for a forced stop if necessary
   depends_on = [ terraform_data.catalogue ]
 }
-
+      
 ##AMI Creation 
 resource "aws_ami_from_instance" "catalogue" {
   name               = "${local.common_name_suffix}-catalogue-AMI"
