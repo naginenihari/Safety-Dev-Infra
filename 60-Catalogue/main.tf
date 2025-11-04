@@ -160,6 +160,7 @@ content {
   }
 }
 
+# Creating the autoscaling policy and assign to autoscaling group
 resource "aws_autoscaling_policy" "catalogue" {
   autoscaling_group_name = aws_autoscaling_group.catalogue.name
   name = "${local.common_name_suffix}-catalogue"
@@ -172,6 +173,7 @@ target_value = 70
   }
 }
 
+# Creating loadbalancer listener rule
 resource "aws_lb_listener_rule" "catalogue" {
   listener_arn =local.backend_alb_listener_arn
   priority     = 10
