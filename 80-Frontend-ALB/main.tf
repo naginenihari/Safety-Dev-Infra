@@ -1,48 +1,49 @@
-resource "aws_lb" "backend_alb" {
-  name               = "${local.common_name_suffix}-backend-alb"
-  internal           = true
+resource "aws_lb" "frontend_alb" {
+  name               = "${local.common_name_suffix}-frontend-alb"
+  internal           = false
   load_balancer_type = "application"
-  security_groups    = [local.backend_alb_sg_id]
-  subnets            = local.private_subnet_ids
+  security_groups    = [local.frontend_alb_sg_id]
+  subnets            = local.public_subnet_ids
 
-  enable_deletion_protection = true  ##Prevent accidental deletion from UI
+  enable_deletion_protection = false
+  #enable_deletion_protection = true  ##Prevent accidental deletion from UI
 
  tags = merge (
         local.common_tags,
         {
-            Name = "${var.project_name}-${var.environment}-backend-alb"
+            Name = "${var.project_name}-${var.environment}-frontend-alb"
         }
     )
 }
-
-##Backend ALB listening on port number 80
-resource "aws_lb_listener" "backend_alb" {
-  load_balancer_arn = aws_lb.backend_alb.arn
-  port              = "80"
-  protocol          = "HTTP"
   
-  default_action {
-    type = "fixed-response"
+
+    resource "aws_lb_listener" "frontend_alb" {
+      load_balancer_arn = aws_lb.frontend_alb.arn
+      port              = 443
+      protocol          = "HTTPS"
+      ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06" # Or a more recent policy
+      certificate_arn   = local.frontend_alb_certificate_arn # ARN of your SSL certificate
+     
+       default_action {
+       type = "fixed-response"
 
     fixed_response {
-      content_type = "text/plain"
-      message_body = "Hi, am from backend ALB HTTP Health Check"
+      content_type = "text/html"
+      message_body = "<h1>Hi, am from frontend ALB HTTPS Health Check</h1>"
       status_code  = "200"
     }
   }
-}
 
-resource "aws_route53_record" "backend_alb" {
+  }
+
+    resource "aws_route53_record" "frontend_alb" {
   zone_id = var.zone_id
-  name    = "*.backend_alb-${var.environment}.${var.domain_name}"
+  name    = "safety-${var.environment}.${var.domain_name}"
   type    = "A"
 
   alias {
-    name                   = aws_lb.backend_alb.dns_name
-    zone_id                = aws_lb.backend_alb.zone_id
+    name                   = aws_lb.frontend_alb.dns_name
+    zone_id                = aws_lb.frontend_alb.zone_id
     evaluate_target_health = true
   }
 }
-
-
-  
