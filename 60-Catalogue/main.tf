@@ -148,7 +148,6 @@ resource "aws_autoscaling_group" "catalogue" {
     }
     triggers = ["launch_template"]
   }
-}
   
  # we will get the iterator with name as tag
   dynamic "tag" {
