@@ -86,10 +86,11 @@ resource "aws_launch_template" "catalogue" {
   name ="${var.project_name}-${var.environment}-catalogue"
   image_id =aws_ami_from_instance.catalogue.id
   instance_initiated_shutdown_behavior = "terminate"
-  
   instance_type = "t2.micro"
-
   vpc_security_group_ids = [local.catalogue_sg_id]
+
+##when we ran terraform apply again,a new version template will be created with new AMI
+update_default_version = true
 
 # tags attached to the instance
   tag_specifications {
@@ -139,6 +140,15 @@ resource "aws_autoscaling_group" "catalogue" {
   }
   vpc_zone_identifier       = local.private_subnet_ids
   target_group_arns = [aws_lb_target_group.catalogue.arn]
+  
+   instance_refresh {
+    strategy = "Rolling"
+    preferences {
+      min_healthy_percentage = 50  ##atleast 50% instances should be up and running 
+    }
+    triggers = ["launch_template"]
+  }
+}
   
  # we will get the iterator with name as tag
   dynamic "tag" {
