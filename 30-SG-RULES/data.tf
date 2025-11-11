@@ -33,3 +33,23 @@ data "aws_ssm_parameter" "catalogue_sg_id" {
 data "aws_ssm_parameter" "frontend_alb_sg_id" {
   name = "/${var.project_name}/${var.environment}/frontend_alb/sg_id"
 }
+
+data "aws_ssm_parameter" "user_sg_id" {
+  name = "/${var.project_name}/${var.environment}/user/sg_id"
+}
+
+data "aws_ssm_parameter" "cart_sg_id" {
+  name = "/${var.project_name}/${var.environment}/cart/sg_id"
+}
+
+data "aws_ssm_parameter" "shipping_sg_id" {
+  name = "/${var.project_name}/${var.environment}/shipping/sg_id"
+}
+
+data "aws_ssm_parameter" "payment_sg_id" {
+  name = "/${var.project_name}/${var.environment}/payment/sg_id"
+}
+
+data "aws_ssm_parameter" "frontend_sg_id" {
+  name = "/${var.project_name}/${var.environment}/frontend/sg_id"
+}
