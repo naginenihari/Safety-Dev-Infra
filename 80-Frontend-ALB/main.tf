@@ -40,6 +40,7 @@ resource "aws_lb" "frontend_alb" {
   zone_id = var.zone_id
   name    = "safety-${var.environment}.${var.domain_name}"
   type    = "A"
+  allow_overwrite = true
 
   alias {
     name                   = aws_lb.frontend_alb.dns_name
