@@ -21,7 +21,7 @@ resource "aws_lb" "frontend_alb" {
       load_balancer_arn = aws_lb.frontend_alb.arn
       port              = 443
       protocol          = "HTTPS"
-      ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06" # Or a more recent policy
+      ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06" # added a more recent policy
       certificate_arn   = local.frontend_alb_certificate_arn # ARN of your SSL certificate
      
        default_action {
