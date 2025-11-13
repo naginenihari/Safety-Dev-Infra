@@ -1,6 +1,7 @@
 component=$1
 env=$2
 dnf install ansible -y
+
 REPO_URL=https://github.com/naginenihari/Ansible_Roboshop_Roles-Terraform.git
 REPO_DIR=/opt/safety/ansible
 ANSIBLE_DIR=Ansible_Roboshop_Roles-Terraform
@@ -11,6 +12,7 @@ mkdir -p /var/log/safety
 touch ansible.log
 
 cd $REPO_DIR
+# check if ansible repo is already cloned or not
 if [ -d $ANSIBLE_DIR ]; then
    cd $ANSIBLE_DIR
    git pull
@@ -18,5 +20,5 @@ else
    git clone $REPO_URL
    cd $ANSIBLE_DIR
 fi
-
+echo "env is: $2"
 ansible-playbook -e component=$component -e env=$env main.yaml
