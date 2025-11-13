@@ -9,19 +9,19 @@ variable "environment" {
 variable "sg_names" {
   default = [
     #Databases
-    "mongodb","redis","mysql","rabbitmq",
+    "mongodb", "redis", "mysql", "rabbitmq",
     #Backend
-    "catalogue","user","cart","shipping","payment",
+    "catalogue", "user", "cart", "shipping", "payment",
 
     #frontend
     "frontend",
-     #Bastion
+    #Bastion
     "bastion",
     #Frontend Applcation Loadbalancer
     "frontend_alb",
     #Backend Application Loadbalancer
     "backend_alb"
-    ]
+  ]
 }
 
 variable "zone_id" {

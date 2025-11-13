@@ -5,10 +5,10 @@ resource "aws_acm_certificate" "safety" {
   tags = merge(
     local.common_tags,
     {
-    Name = local.common_name_suffix
+      Name = local.common_name_suffix
     }
   )
-    lifecycle {
+  lifecycle {
     create_before_destroy = true
   }
 }
