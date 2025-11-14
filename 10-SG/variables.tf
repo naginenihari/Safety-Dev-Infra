@@ -20,6 +20,8 @@ variable "sg_names" {
     #Frontend Applcation Loadbalancer
     "frontend_alb",
     #Backend Application Loadbalancer
-    "backend_alb"
+    "backend_alb",
+    #VPN SG
+    "open_vpn"
   ]
 }
