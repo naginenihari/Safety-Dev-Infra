@@ -12,4 +12,52 @@ locals {
   payment_sg_id      = data.aws_ssm_parameter.payment_sg_id.value
   shipping_sg_id     = data.aws_ssm_parameter.shipping_sg_id.value
   frontend_sg_id     = data.aws_ssm_parameter.frontend_sg_id.value
+  open_vpn_sg_id     = data.aws_ssm_parameter.open_vpn_sg_id.value
+
+  vpn_ingress_rules={
+    mysql_22={
+      sg_id=local.mysql_sg_id
+      port=22
+    }
+       mysql_3306={
+      sg_id=local.mysql_sg_id
+      port=3306
+    }
+     redis_22={
+      sg_id=local.redis_sg_id
+      port=22
+    }
+      mongodb={
+      sg_id=local.mongodb_sg_id
+      port=22
+    }
+      rabbitmq={
+      sg_id=local.rabbitmq_sg_id
+      port=22
+    }
+      user_22={
+      sg_id=local.user_sg_id
+      port=22
+    }
+      cart_22={
+      sg_id=local.cart_sg_id
+      port=22
+    }
+       shipping_22={
+      sg_id=local.shipping_sg_id
+      port=22
+    }
+       payment_22={
+      sg_id=local.payment_sg_id
+      port=22
+    }
+       frontend_22={
+      sg_id=local.frontend_sg_id
+      port=22
+    }
+       backend_alb_22={
+      sg_id=local.backend_alb_sg_id
+      port=22
+    }
+  }
 }

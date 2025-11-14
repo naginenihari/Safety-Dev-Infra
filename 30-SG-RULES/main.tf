@@ -294,6 +294,81 @@ resource "aws_security_group_rule" "bastion_laptop" {
   to_port           = 22
 }
 
+##### Bastion SG RUles #####
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "open_vpn_public" {
+  type              = "ingress"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 22
+  protocol          = "tcp"
+  to_port           = 22
+}
+
+##### Bastion SG RUles #####
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "open_vpn_943" {
+  type              = "ingress"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 943
+  protocol          = "tcp"
+  to_port           = 943
+}
+
+##### Bastion SG RUles #####
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "open_vpn_443" {
+  type              = "ingress"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 443
+  protocol          = "tcp"
+  to_port           = 443
+}
+
+##### Bastion SG RUles #####
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "open_vpn_1193" {
+  type              = "ingress"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 1193
+  protocol          = "tcp"
+  to_port           = 1193
+}
+
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "catalogue_vpn" {
+  type              = "ingress"
+  security_group_id = local.catalogue_sg_id
+  source_security_group_id   = local.open_vpn_sg_id
+  from_port         = 22
+  protocol          = "tcp"
+  to_port           = 22
+}
+
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "catalogue_vpn_8080" {
+  type              = "ingress"
+  security_group_id = local.catalogue_sg_id
+  source_security_group_id   = local.open_vpn_sg_id
+  from_port         = 8080
+  protocol          = "tcp"
+  to_port           = 8080
+}
+
+# bastion accepting traffic from my laptop
+resource "aws_security_group_rule" "components_vpn" {
+  for_each = local.vpn_ingress_rules
+  type              = "ingress"
+  security_group_id = each.value.sg_id
+  source_security_group_id   = local.open_vpn_sg_id
+  from_port         = each.value.port
+  protocol          = "tcp"
+  to_port           = each.value.port
+}
+
 /* # # This is the mistake we did, cart can't access catalogue component directly, it should be through backend ALB
 # #catalogue accepting traffic from cart on port number 8080
 #  resource "aws_security_group_rule" "catalogue_cart"{
