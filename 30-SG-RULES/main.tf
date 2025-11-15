@@ -338,7 +338,7 @@ resource "aws_security_group_rule" "open_vpn_1193" {
   to_port           = 1193
 }
 
-# bastion accepting traffic from my laptop
+# Catalogue accepting traffic from OpenVPN
 resource "aws_security_group_rule" "catalogue_vpn" {
   type              = "ingress"
   security_group_id = local.catalogue_sg_id
@@ -348,7 +348,7 @@ resource "aws_security_group_rule" "catalogue_vpn" {
   to_port           = 22
 }
 
-# bastion accepting traffic from my laptop
+# Catalogue accepting traffic from OpenVPN_8080
 resource "aws_security_group_rule" "catalogue_vpn_8080" {
   type              = "ingress"
   security_group_id = local.catalogue_sg_id
@@ -358,7 +358,7 @@ resource "aws_security_group_rule" "catalogue_vpn_8080" {
   to_port           = 8080
 }
 
-# bastion accepting traffic from my laptop
+# All components are accepting traffic from my OpenVPN
 resource "aws_security_group_rule" "components_vpn" {
   for_each = local.vpn_ingress_rules
   type              = "ingress"
