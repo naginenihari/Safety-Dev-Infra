@@ -294,8 +294,8 @@ resource "aws_security_group_rule" "bastion_laptop" {
   to_port           = 22
 }
 
-##### Bastion SG RUles #####
-# bastion accepting traffic from my laptop
+##### OpenVPN SG RUles #####
+#Open VPN accepting traffic from my laptop
 resource "aws_security_group_rule" "open_vpn_public" {
   type              = "ingress"
   security_group_id = local.open_vpn_sg_id
@@ -305,8 +305,7 @@ resource "aws_security_group_rule" "open_vpn_public" {
   to_port           = 22
 }
 
-##### Bastion SG RUles #####
-# bastion accepting traffic from my laptop
+# OpenVPN accepting traffic from port number 943
 resource "aws_security_group_rule" "open_vpn_943" {
   type              = "ingress"
   security_group_id = local.open_vpn_sg_id
@@ -316,8 +315,7 @@ resource "aws_security_group_rule" "open_vpn_943" {
   to_port           = 943
 }
 
-##### Bastion SG RUles #####
-# bastion accepting traffic from my laptop
+# OpenVPN accepting traffic from port number 443
 resource "aws_security_group_rule" "open_vpn_443" {
   type              = "ingress"
   security_group_id = local.open_vpn_sg_id
@@ -327,8 +325,7 @@ resource "aws_security_group_rule" "open_vpn_443" {
   to_port           = 443
 }
 
-##### Bastion SG RUles #####
-# bastion accepting traffic from my laptop
+# bastion accepting traffic from port number 1193
 resource "aws_security_group_rule" "open_vpn_1193" {
   type              = "ingress"
   security_group_id = local.open_vpn_sg_id
