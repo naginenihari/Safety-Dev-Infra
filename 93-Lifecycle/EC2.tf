@@ -1,5 +1,4 @@
 resource "aws_instance" "terraform" {
-  count=0
   ami                    = "ami-09c813fb71547fc4f"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.lifecycle.id]
@@ -8,6 +7,18 @@ resource "aws_instance" "terraform" {
     Terraform = "true"
   }
 
+}
+
+resource "aws_instance" "another" {
+    ami = "ami-09c813fb71547fc4f"
+    instance_type = "t2.micro"
+    tags = {
+        Name = "another"
+        Terraform = "true"
+    }
+    /* lifecycle{
+      prevent_destroy = true
+    } */
 }
 
 resource "aws_security_group" "lifecycle" {
